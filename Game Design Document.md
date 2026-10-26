@@ -1,6 +1,6 @@
 # Mind Blower - Game Design Document
 
-Oct 26, 2026 · @Elouan
+Oct 26, 2026 · @ElouanHF
 
 ## Overview
 
