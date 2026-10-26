@@ -74,7 +74,7 @@
     const left = $(".foot-left");
     let text = "";
     if (v.phase === "lobby" && v.host_joined) text = `Scan the code to join. <b>Use your real name!</b>`;
-    if (v.phase === "lobby" && !v.host_joined) text = `The host joins first, using the link in the PyCharm console.`;
+    if (v.phase === "lobby" && !v.host_joined) text = `The host joins first, using the link in the console.`;
     if (v.phase === "party") text = `Find them, chat, answer. <b>Every answer counts.</b>`;
     if (v.phase === "grace") text = `Finish your last answer. <b>No more new questions!</b>`;
     if (v.phase === "review") {
@@ -118,7 +118,7 @@
       ? `<div class="qr-card pop-in">${v.qr}</div><div class="big">Scan to join</div>
          <div class="url">or go to <b>${esc(host)}</b></div>`
       : `<div class="waiting-host breathe">Waiting for the host to join</div>
-         <p>Host: open the link shown in the PyCharm console on your phone. The code for everyone else appears here once you're in.</p>`;
+         <p>Host: open the link shown in the console on your phone. The code for everyone else appears here once you're in.</p>`;
   }
 
   function tileHtml(p) {
