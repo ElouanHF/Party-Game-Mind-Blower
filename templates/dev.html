@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Mind Blower - dev</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/icon.svg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+  <style>
+    body { padding: 16px; background: #F7E6D6; }
+    h1 { font-size: 20px; margin-bottom: 4px; }
+    p { font-size: 14px; color: var(--cocoa-soft); margin-bottom: 12px; }
+    .wrap { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .tv { width: 100%; aspect-ratio: 16 / 9; border: 6px solid var(--cocoa); border-radius: 14px; background: var(--cream); }
+    .phones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .phone { display: flex; flex-direction: column; gap: 6px; }
+    .phone span { font-weight: 600; font-size: 14px; }
+    .phone iframe { width: 100%; height: 720px; border: 6px solid var(--cocoa); border-radius: 26px; background: var(--cream); }
+    @media (min-width: 1700px) {
+      .wrap { grid-template-columns: 1.3fr 1fr; align-items: start; }
+      .phones { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Mind Blower dev page</h1>
+  <p>The TV plus four separate phones. Phone 1 is the host: join with it first. Use "No camera? Use a cartoon face" for selfies. Dev tools are on the left of the TV.</p>
+  <div class="wrap">
+    <iframe class="tv" src="/tv" title="TV"></iframe>
+    <div class="phones">
+      <label class="phone"><span>Phone 1 (host)</span><iframe src="/?slot=1&host={{ host_key }}" title="Phone 1"></iframe></label>
+      <label class="phone"><span>Phone 2</span><iframe src="/?slot=2" title="Phone 2"></iframe></label>
+      <label class="phone"><span>Phone 3</span><iframe src="/?slot=3" title="Phone 3"></iframe></label>
+      <label class="phone"><span>Phone 4</span><iframe src="/?slot=4" title="Phone 4"></iframe></label>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+/* Mind Blower theme: cute, orange and bubbly. Shared by the phone, TV and dev pages. */
+
+@font-face { font-family: Fredoka; font-weight: 400; src: url(../fonts/fredoka-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: Fredoka; font-weight: 600; src: url(../fonts/fredoka-latin-600-normal.woff2) format("woff2"); }
+@font-face { font-family: Fredoka; font-weight: 700; src: url(../fonts/fredoka-latin-700-normal.woff2) format("woff2"); }
+
+:root {
+  --cream: #FFF6EC;
+  --tangerine: #FF8A3D;
+  --burnt: #E8681A;
+  --deep: #B9461A;
+  --peach: #FFD9BD;
+  --peach-soft: #FFE9D6;
+  --ledge: #F3D8C2;
+  --cocoa: #4A2C1D;
+  --cocoa-soft: #8A5A3C;
+  --correct: #2FBF71;
+  --correct-dark: #23985A;
+  --partly: #FFB020;
+  --partly-dark: #D48E10;
+  --wrong: #F2545B;
+  --wrong-dark: #C83C43;
+  --mind: #8B5CF6;
+  --mind-dark: #6B3FD6;
+  --mind-soft: #E2D4FB;
+  --m: 1; /* motion multiplier; dev slow motion sets 4 */
+}
+html.slow { --m: 4; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: Fredoka, "Trebuchet MS", sans-serif;
+  color: var(--cocoa);
+  background: var(--cream);
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+button:disabled { cursor: default; }
+input, textarea { font: inherit; color: inherit; }
+img { display: block; }
+
+/* ---------------------------------------------------------------- shared pieces */
+
+.logo { position: relative; display: inline-flex; align-items: center; font-weight: 700; line-height: 1; white-space: nowrap; }
+.logo .burst { position: absolute; left: -0.45em; top: 50%; width: 1.5em; height: 1.5em; transform: translateY(-50%); z-index: 0;
+  animation: spin calc(30s * var(--m)) linear infinite; }
+.logo .burst svg { width: 100%; height: 100%; }
+.logo .word { position: relative; z-index: 1; }
+.logo b { color: var(--tangerine); font-weight: 700; }
+
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 0.4em;
+  border-radius: 999px; font-weight: 600; padding: 0.75em 1.2em; text-align: center;
+  background: var(--tangerine); color: #fff;
+  box-shadow: 0 0.25em 0 var(--burnt);
+  transition: transform calc(0.08s * var(--m)), box-shadow calc(0.08s * var(--m)), opacity 0.2s;
+}
+.btn:active:not(:disabled) { transform: translateY(0.2em); box-shadow: 0 0.05em 0 var(--burnt); }
+.btn:disabled { opacity: 0.4; }
+.btn.ghost { background: #fff; color: var(--cocoa); box-shadow: 0 0.25em 0 #EBC9AE; }
+.btn.ghost:active:not(:disabled) { box-shadow: 0 0.05em 0 #EBC9AE; }
+.btn.grape { background: var(--mind); box-shadow: 0 0.25em 0 var(--mind-dark); }
+.btn.pulse:not(:disabled) { animation: pulse calc(1.4s * var(--m)) ease-in-out infinite; }
+
+.card { background: #fff; border-radius: 24px; padding: 20px; box-shadow: 0 6px 0 var(--ledge); }
+.chip { display: inline-block; background: var(--peach); border-radius: 999px; padding: 6px 14px; font-weight: 600; font-size: 15px; }
+.muted { color: var(--cocoa-soft); }
+.name-hl { color: var(--tangerine); }
+
+.ring { display: inline-block; border-radius: 50%; border: 6px solid #fff; box-shadow: 0 0 0 4px var(--peach); background: var(--peach); overflow: hidden; line-height: 0; position: relative; }
+.ring img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+.toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 140%); z-index: 100;
+  background: var(--cocoa); color: #fff; padding: 12px 20px; border-radius: 18px; max-width: 90vw;
+  font-weight: 600; text-align: center; transition: transform calc(0.3s * var(--m)) cubic-bezier(.3,1.6,.6,1);
+}
+.toast.show { transform: translate(-50%, 0); }
+
+.offline { position: fixed; inset: 0; z-index: 90; display: none; align-items: center; justify-content: center;
+  background: rgba(255, 246, 236, 0.85); font-size: 20px; font-weight: 600; text-align: center; padding: 24px; }
+.offline.show { display: flex; }
+.offline .dots::after { content: "..."; animation: blink 1.2s steps(4) infinite; }
+
+/* ---------------------------------------------------------------- motion */
+
+@keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+@keyframes wiggle { 0%, 90%, 100% { transform: rotate(0); } 93% { transform: rotate(-3deg); } 96% { transform: rotate(3deg); } }
+@keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+@keyframes blink { 0% { content: ""; } 25% { content: "."; } 50% { content: ".."; } 75% { content: "..."; } }
+@keyframes pop-in { 0% { transform: scale(0.2); opacity: 0; } 70% { transform: scale(1.12); opacity: 1; } 100% { transform: scale(1); } }
+@keyframes rise-in { from { transform: translateY(30px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes slide-in { from { transform: translateX(110%) rotate(6deg); } to { transform: none; } }
+@keyframes bump { 0% { transform: scale(1); } 30% { transform: scale(1.35, 0.8); } 55% { transform: scale(0.9, 1.15); } 80% { transform: scale(1.06); } 100% { transform: scale(1); } }
+@keyframes flash { 0% { box-shadow: 0 0 0 4px var(--peach); } 25% { box-shadow: 0 0 0 10px var(--flash), 0 0 40px 14px var(--flash); } 100% { box-shadow: 0 0 0 4px var(--peach); } }
+@keyframes spin-in { from { transform: rotate(-200deg) scale(0); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes drain { from { stroke-dashoffset: 0; } to { stroke-dashoffset: var(--len); } }
+@keyframes rustle { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(1.5deg); } }
+
+.pop-in { animation: pop-in calc(0.5s * var(--m)) cubic-bezier(.3,1.5,.6,1) both; }
+.rise-in { animation: rise-in calc(0.45s * var(--m)) ease-out both; }
+.bump { animation: bump calc(0.6s * var(--m)) ease-out; }
+.flash { animation: flash calc(0.9s * var(--m)) ease-out; }
+.bob { animation: bob calc(2.4s * var(--m)) ease-in-out infinite; }
+.breathe { animation: breathe calc(2.6s * var(--m)) ease-in-out infinite; }
+
+.fx-layer { position: fixed; inset: 0; pointer-events: none; z-index: 80; overflow: hidden; }
+.fx-page { position: absolute; width: 46px; height: 58px; border-radius: 6px; border: 3px solid var(--c); background: #fff; }
+.fx-page::after { content: ""; position: absolute; left: 8px; right: 8px; top: 12px; height: 4px; border-radius: 2px; background: var(--c); opacity: .4; box-shadow: 0 9px 0 var(--c), 0 18px 0 var(--c); }
+.fx-burst { position: absolute; transform: translate(-50%, -50%); }
+.fx-confetti { position: absolute; top: -20px; border-radius: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01s !important; animation-iteration-count: 1 !important; transition: none !important; }
+}
