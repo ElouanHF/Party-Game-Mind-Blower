@@ -122,6 +122,10 @@ body { overflow: hidden; }
 .award-card .w .ring { width: 22rem; height: 22rem; }
 .award-card .w .nm { font-size: 4rem; font-weight: 700; margin-top: 1.4rem; }
 .award-card .w .sub { font-size: 2.8rem; color: var(--cocoa-soft); margin-top: 0.4rem; }
+.award-card .shared-sub { font-size: 3.4rem; color: var(--cocoa-soft); margin: -1.6rem 0 3.4rem; }
+.award-card .winners.tie .ring { width: 17rem; height: 17rem; }
+.award-card .winners.tie .nm { font-size: 3.4rem; }
+.award-card .tie-note { font-size: 2.6rem; font-weight: 700; color: var(--tangerine); margin-top: 2.4rem; }
 
 .podium-wrap { flex: 1; display: flex; gap: 5rem; align-items: flex-end; justify-content: center; min-width: 0; margin-bottom: -3.4rem; }
 .podium { display: flex; align-items: flex-end; gap: 2.8rem; }

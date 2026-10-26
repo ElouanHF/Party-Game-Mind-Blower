@@ -39,6 +39,7 @@ MIND_BLOWN_GIVER_BONUS = 1  # points to the marker for each Mind blown handed ou
 
 # Awards
 AWARD_MIN_ANSWERS = 3  # for the "share marked right" awards and Quick Draw
+AWARD_MAX_WINNERS = 3  # an award tied between more people than this is skipped
 
 # Selfies
 SELFIE_MAX_BYTES = 3 * 1024 * 1024

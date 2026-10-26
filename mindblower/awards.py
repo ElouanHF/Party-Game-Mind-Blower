@@ -2,7 +2,8 @@
 
 Each function gets the players and answers and returns a list of
 (player, subtext) winners. An empty list means nobody qualifies, and the
-award is not shown. Ties share the award; a player can win several.
+award is not shown. Ties share the award (up to AWARD_MAX_WINNERS people,
+otherwise it's skipped because it wouldn't mean much); a player can win several.
 """
 from __future__ import annotations
 
@@ -160,7 +161,7 @@ def compute_awards(players: list[Player], answers: list[Answer]) -> list[dict]:
     results = []
     for key, title, fn in AWARDS:
         winners = fn(players, answers)
-        if winners:
+        if 0 < len(winners) <= config.AWARD_MAX_WINNERS:
             results.append({
                 "key": key,
                 "title": title,
@@ -173,7 +174,7 @@ def compute_awards(players: list[Player], answers: list[Answer]) -> list[dict]:
         for w in award["winners"]:
             tally[w["player_id"]] += 1
     decorated = [(p, v) for p, v in _pick([(p, tally[p.id]) for p in players], "most") if v >= 2]
-    if decorated:
+    if 0 < len(decorated) <= config.AWARD_MAX_WINNERS:
         results.append({
             "key": "decorated",
             "title": "Decorated",

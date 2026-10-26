@@ -79,3 +79,9 @@ def test_quick_draw_formats_time():
     assert format_duration(45) == "45 s"
     assert format_duration(100) == "1 min 40 s"
     assert format_duration(120) == "2 min"
+
+
+def test_big_ties_are_skipped():
+    players = [player(p) for p in "abcde"]
+    answers = [answer(p, "e") for p in "abcd"]  # a, b, c and d each submitted 1
+    assert "social_butterfly" not in by_key(compute_awards(players, answers))

@@ -248,11 +248,22 @@
   }
 
   function awardEl(step) {
+    // Tied winners usually share the same line ("Most skips used: 9"), so show it once.
+    const shared = step.winners.every((w) => w.subtext === step.winners[0].subtext);
+    const tie = step.winners.length > 1 ? "tie" : "";
     return html(`<div class="award-card">
       <div class="title">${esc(step.title)}</div>
-      <div class="winners">${step.winners.map((w) => `<div class="w">${MB.face(w)}<div class="nm">${esc(w.name)}</div>
-        <div class="sub">${esc(w.subtext)}</div></div>`).join("")}</div>
+      ${shared ? `<div class="shared-sub">${esc(step.winners[0].subtext)}</div>` : ""}
+      <div class="winners ${tie}">${step.winners.map((w) => `<div class="w">${MB.face(w)}<div class="nm">${esc(w.name)}</div>
+        ${shared ? "" : `<div class="sub">${esc(w.subtext)}</div>`}</div>`).join("")}</div>
+      ${tie ? `<div class="tie-note">It's a tie!</div>` : ""}
     </div>`);
+  }
+
+  function podiumNames(players) {
+    const names = players.map((x) => esc(x.name));
+    if (names.length <= 3) return names.join(" & ");
+    return `${names.slice(0, 2).join(", ")} & ${names.length - 2} others`;
   }
 
   function updateBoard(step) {
@@ -262,8 +273,8 @@
       let col = $(`.pcol.p${p.place}`, podium);
       if (!col) {
         col = html(`<div class="pcol p${p.place} hidden"><div class="who">
-            <div class="faces ${p.players.length > 2 ? "many" : ""}">${p.players.map((x) => MB.face(x)).join("")}</div>
-            <div class="nm">${p.players.map((x) => esc(x.name)).join(" & ")}</div>
+            <div class="faces ${p.players.length > 2 ? "many" : ""}">${p.players.slice(0, 3).map((x) => MB.face(x)).join("")}</div>
+            <div class="nm">${podiumNames(p.players)}</div>
             <div class="pts">${p.points} pts</div></div>
           <div class="pblock">${p.place}</div></div>`);
         podium.appendChild(col);
